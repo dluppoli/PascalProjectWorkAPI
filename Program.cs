@@ -30,10 +30,11 @@ if (app.Environment.IsDevelopment())
 app.UseCors("localhost");
 app.UseHttpsRedirection();
 
-app.MapGet("categories", async (DatabaseContext context, string search, ushort page=1, ushort pagesize=10) =>
+app.MapGet("categories", async (DatabaseContext context, string? search, ushort page=1, ushort pagesize=10) =>
 {
     var retval = await context.Categories.Where(w=>search==null || w.Name.Contains(search)).Skip( (page-1)*pagesize ).Take(pagesize).ToListAsync();
-    return Results.Ok(retval);
+    var totalCount = await context.Categories.Where(w=>search==null || w.Name.Contains(search)).CountAsync();
+    return Results.Ok(new PaginatedResultDto<Category>(retval,totalCount));
 })
 .WithOpenApi();
 
@@ -45,24 +46,27 @@ app.MapGet("categories/{id}", async (DatabaseContext context, int id) =>
 })
 .WithOpenApi();
 
-app.MapGet("categories/{id}/products", async (DatabaseContext context, string search, int id,ushort page=1, ushort pagesize=10) =>
+app.MapGet("categories/{id}/products", async (DatabaseContext context, string? search, int id,ushort page=1, ushort pagesize=10) =>
 {
     if(page<=1)page=1;
     if(pagesize<=0) pagesize=10;
 
     var retval = await context.Products.Include(i=>i.Category).Where(w=>search==null || w.Description.Contains(search) || w.Title.Contains(search)).Skip( (page-1)*pagesize ).Take(pagesize).ToListAsync();
+    var totalCount = await context.Products.Where(w=>search==null || w.Description.Contains(search) || w.Title.Contains(search)).CountAsync();
     if( retval.Count==0 ) return Results.NotFound();
-    return Results.Ok(retval);
+
+    return Results.Ok(new PaginatedResultDto<Product>(retval,totalCount));
 })
 .WithOpenApi();
 
-app.MapGet("products", async (DatabaseContext context, string search, ushort page=1, ushort pagesize=10) =>
+app.MapGet("products", async (DatabaseContext context, string? search, ushort page=1, ushort pagesize=10) =>
 {
     if(page<=1)page=1;
     if(pagesize<=0) pagesize=10;
 
     var retval = await context.Products.Where(w=>search==null || w.Description.Contains(search) || w.Title.Contains(search)).Include(i=>i.Category).Skip( (page-1)*pagesize ).Take(pagesize).ToListAsync();
-    return Results.Ok(retval);
+    var totalCount = await context.Products.Where(w=>search==null || w.Description.Contains(search) || w.Title.Contains(search)).CountAsync();
+    return Results.Ok(new PaginatedResultDto<Product>(retval,totalCount));
 })
 .WithOpenApi();
 
@@ -80,7 +84,8 @@ app.MapGet("orders", async (DatabaseContext context, IMapper mapper, ushort page
     if(pagesize<=0) pagesize=10;
 
     var retval = await context.Orders.ProjectTo<OrderDto>(mapper.ConfigurationProvider).Skip( (page-1)*pagesize ).Take(pagesize).ToListAsync();
-    return Results.Ok(retval);
+    var totalCount = await context.Orders.CountAsync();
+    return Results.Ok(new PaginatedResultDto<OrderDto>(retval,totalCount));
 })
 .WithOpenApi();
 
