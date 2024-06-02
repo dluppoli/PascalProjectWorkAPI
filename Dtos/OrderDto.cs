@@ -4,9 +4,11 @@ public class OrderDto
 {
     
     public int Id { get; set; }
-    public string ClientName { get; set; }
-    public string Address { get; set; }
+    public required string ClientName { get; set; }
+    public required string Address { get; set; }
     public double TotalPrice { get; set; }
 
-    public List<OrderDetailDto> Details { get; set; }
+    public required CreditCardDto Payment { get; set; }
+
+    public required List<OrderDetailDto> Details { get; set; }
 }

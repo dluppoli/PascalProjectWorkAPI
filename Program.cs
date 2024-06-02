@@ -116,6 +116,18 @@ app.MapPost("orders",async (DatabaseContext context, IMapper mapper,[FromBody]Or
         }
         if(totalPriceCheck!=candidate.TotalPrice) return Results.BadRequest("Totale non corretto");
 
+        if( newOrder.Payment==null) return Results.BadRequest("Metodo di pagamento mancante");
+        if( newOrder.Payment.Cvv <=100 || newOrder.Payment.Cvv>999 ) return Results.BadRequest("CVV Errato");
+        if( newOrder.Payment.Number.Length != 16 || !long.TryParse(  newOrder.Payment.Number,out long foo) ) return Results.BadRequest("Numero Carta Errato");
+        if( string.IsNullOrEmpty(newOrder.Payment.OwnerName) || string.IsNullOrWhiteSpace(newOrder.Payment.OwnerName)) return Results.BadRequest("Intestatrio Mancante");
+
+        if( newOrder.Payment.Expire.Length != 4 || !int.TryParse(newOrder.Payment.Expire,out int foo2) ) return Results.BadRequest("Scadenza Errata");
+        int meseScadenza = int.Parse(newOrder.Payment.Expire.Substring(0,2));
+        int annoScadenza = 2000 + int.Parse(newOrder.Payment.Expire.Substring(2,2));
+        int annoAttuale = DateTime.Today.Year;
+        int meseAttuale = DateTime.Today.Month;
+        if( annoScadenza < annoAttuale || (annoScadenza==annoAttuale && meseScadenza<meseAttuale) ) return Results.BadRequest("Scadenza Errata");
+
         context.Orders.Add(candidate);
         await context.SaveChangesAsync();
         return Results.Ok();
