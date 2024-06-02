@@ -141,7 +141,7 @@ app.MapPost("orders",async (DatabaseContext context, IMapper mapper,[FromBody]Or
 
         context.Orders.Add(candidate);
         await context.SaveChangesAsync();
-        return Results.Ok();
+        return Results.Ok(candidate.Id);
     }
     catch(Exception)
     {
