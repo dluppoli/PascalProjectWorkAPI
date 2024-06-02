@@ -10,6 +10,9 @@ public class Order
     public int Id { get; set; }
     public string ClientName { get; set; }
     public string Address { get; set; }
+    
+    [EmailAddress]
+    public string Email { get; set; }
     public double TotalPrice { get; set; }
 
     [InverseProperty("Order")]

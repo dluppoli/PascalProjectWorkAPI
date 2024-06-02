@@ -104,6 +104,17 @@ app.MapPost("orders",async (DatabaseContext context, IMapper mapper,[FromBody]Or
         var candidate = mapper.Map<Order>(newOrder);
 
         if(candidate==null) return Results.BadRequest("Dati mancanti");
+        if( string.IsNullOrEmpty(newOrder.ClientName) || string.IsNullOrWhiteSpace(newOrder.ClientName)) return Results.BadRequest("Ciente Mancante");
+        if( string.IsNullOrEmpty(newOrder.Address) || string.IsNullOrWhiteSpace(newOrder.Address)) return Results.BadRequest("Indirizzo Mancante");
+        if( string.IsNullOrEmpty(newOrder.Email) || string.IsNullOrWhiteSpace(newOrder.Email)) return Results.BadRequest("Email Mancante");
+
+        try {
+            var addr = new System.Net.Mail.MailAddress(newOrder.Email.Trim());
+        }
+        catch {
+            return Results.BadRequest("Email Errata");
+        }
+
         if( candidate.Details==null || candidate.Details.Count()==0) return Results.BadRequest("Prodotti mancanti");
         if( candidate.Details.Where(q=>q.Quantity<=0).Count()>0) return Results.BadRequest("Prodotti con quantità mancanti");
         

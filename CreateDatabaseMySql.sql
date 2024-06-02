@@ -25,6 +25,7 @@ CREATE TABLE Orders(
 	Id INT PRIMARY KEY auto_increment,
 	ClientName VARCHAR(255) NOT NULL,
 	Address VARCHAR(1024) NOT NULL,
+	Email VARCHAR(255) NOT NULL,
 	TotalPrice FLOAT NOT NULL
 );
 
