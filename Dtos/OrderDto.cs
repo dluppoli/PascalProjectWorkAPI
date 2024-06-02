@@ -9,7 +9,7 @@ public class OrderDto
     
     public required string Email { get; set; }
     
-    public double TotalPrice { get; set; }
+    public required double TotalPrice { get; set; }
 
     public required CreditCardDto Payment { get; set; }
 

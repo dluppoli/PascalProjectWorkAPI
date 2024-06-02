@@ -9,7 +9,7 @@ public class Category
     [Key]
     public int Id {get; set;}
     [MaxLength(50)]
-	public string Name {get; set;}
+	public required string Name {get; set;}
     [MaxLength(255)]
-	public string Image {get; set;}
+	public required string Image {get; set;}
 }

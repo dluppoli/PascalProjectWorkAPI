@@ -9,15 +9,15 @@ public class Product
 	public int Id {get; set;}
 
     [MaxLength(100)]
-	public string Title {get; set;}
+	public required string Title {get; set;}
 
     [MaxLength(1024)]
-	public string Description {get; set;}
+	public required string Description {get; set;}
 
 	public double Price {get; set;}
 	public double Stars {get; set;}
     [MaxLength(1024)]
-	public string Images {get; set;}
+	public required string Images {get; set;}
 	public int IdCategory {get; set;}
 
     [ForeignKey("IdCategory")]

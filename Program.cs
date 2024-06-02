@@ -143,7 +143,7 @@ app.MapPost("orders",async (DatabaseContext context, IMapper mapper,[FromBody]Or
         await context.SaveChangesAsync();
         return Results.Ok();
     }
-    catch(Exception e)
+    catch(Exception)
     {
         return Results.Problem();
     }

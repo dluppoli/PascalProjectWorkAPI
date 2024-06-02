@@ -8,12 +8,12 @@ public class Order
 {
     [Key]
     public int Id { get; set; }
-    public string ClientName { get; set; }
-    public string Address { get; set; }
+    public required string ClientName { get; set; }
+    public required string Address { get; set; }
     
     [EmailAddress]
-    public string Email { get; set; }
-    public double TotalPrice { get; set; }
+    public required string Email { get; set; }
+    public required double TotalPrice { get; set; }
 
     [InverseProperty("Order")]
     public virtual ICollection<OrderDetail>? Details { get; set; } = null;
