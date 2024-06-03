@@ -27,6 +27,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseExceptionHandler(exceptionHandlerApp 
+    => exceptionHandlerApp.Run(async context 
+        => await Results.BadRequest("Formato dati non valido")
+                     .ExecuteAsync(context)));
 app.UseCors("localhost");
 app.UseHttpsRedirection();
 
