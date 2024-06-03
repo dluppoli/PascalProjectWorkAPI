@@ -6,15 +6,9 @@ public class DtoMappingProfile : Profile
 {
     public DtoMappingProfile()
     {
-/*        CreateMap<User, UserDto>()
-            .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role));
-        CreateMap<UserDto, User>()
+        CreateMap<OrderDto, Order>()
             .ForMember(dest => dest.Id, opt => opt.Ignore())
-            .ForMember(dest => dest.Role, opt => opt.Ignore())
-            .ForMember(dest => dest.IdRole, opt => opt.MapFrom(src=>src.Role.Id))
-            .ForMember(dest => dest.Username, opt => opt.MapFrom(src=>src.Username.ToLower()));*/
-
-        CreateMap<OrderDto, Order>();
+            .ForMember(dest => dest.CreateDate, opt => opt.MapFrom(src => DateTime.Now));
         CreateMap<Order, OrderDto>();
 
         CreateMap<OrderDetailDto, OrderDetail>();

@@ -4,6 +4,9 @@ public class OrderDto
 {
     
     public int Id { get; set; }
+    
+    public DateTime CreateDate { get; set; }
+
     public required string ClientName { get; set; }
     public required string Address { get; set; }
     
