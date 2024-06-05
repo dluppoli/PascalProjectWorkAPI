@@ -95,7 +95,7 @@ GET /products/{id}
 Parametri:
 | Parametro | Descrizione | Obbligatorio |
 | :--- | :--- | :--- |
-| `{id}` | Codice categoria | Si |
+| `{id}` | Codice prodotto | Si |
 
 Response:
 ```json
