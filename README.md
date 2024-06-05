@@ -90,15 +90,12 @@ Response:
 ### Prodotto
 Request:
 ```http
-GET /products/{id}?search={search}&page={page}&pagesize={pagesize}
+GET /products/{id}
 ```
 Parametri:
 | Parametro | Descrizione | Obbligatorio |
 | :--- | :--- | :--- |
 | `{id}` | Codice categoria | Si |
-| `{search}` | Termine di ricerca | |
-| `{page}` | Numero di pagina da restituire (default 1) | |
-| `{pagesize}` | Numero di risultati per ogni pagina (default 10) | |
 
 Response:
 ```json
