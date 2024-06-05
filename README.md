@@ -12,7 +12,7 @@ Parametri:
 | :--- | :--- | :--- |
 | `{search}` | Termine di ricerca | |
 | `{page}` | Numero di pagina da restituire (default 1) | |
-| `{search}` | Numero di risultati per ogni pagina (default 10) | |
+| `{pagesize}` | Numero di risultati per ogni pagina (default 10) | |
 
 Response:
 ```json
@@ -62,7 +62,7 @@ Parametri:
 | :--- | :--- | :--- |
 | `{search}` | Termine di ricerca | |
 | `{page}` | Numero di pagina da restituire (default 1) | |
-| `{search}` | Numero di risultati per ogni pagina (default 10) | |
+| `{pagesize}` | Numero di risultati per ogni pagina (default 10) | |
 
 Response:
 ```json
@@ -98,7 +98,7 @@ Parametri:
 | `{id}` | Codice categoria | Si |
 | `{search}` | Termine di ricerca | |
 | `{page}` | Numero di pagina da restituire (default 1) | |
-| `{search}` | Numero di risultati per ogni pagina (default 10) | |
+| `{pagesize}` | Numero di risultati per ogni pagina (default 10) | |
 
 Response:
 ```json
@@ -129,7 +129,7 @@ Parametri:
 | `{id}` | Codice categoria | Si |
 | `{search}` | Termine di ricerca | |
 | `{page}` | Numero di pagina da restituire (default 1) | |
-| `{search}` | Numero di risultati per ogni pagina (default 10) | |
+| `{pagesize}` | Numero di risultati per ogni pagina (default 10) | |
 
 Response:
 ```json
