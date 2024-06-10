@@ -56,7 +56,7 @@ app.MapGet("categories/{id}/products", async (DatabaseContext context, string? s
     if(page<=1)page=1;
     if(pagesize<=0) pagesize=10;
 
-    var retval = await context.Products.Include(i=>i.Category).Where(w=>search==null || w.Description.Contains(search) || w.Title.Contains(search)).Skip( (page-1)*pagesize ).Take(pagesize).ToListAsync();
+    var retval = await context.Products.Include(i=>i.Category).Where(w=>w.IdCategory==id && (search==null || w.Description.Contains(search) || w.Title.Contains(search))).Skip( (page-1)*pagesize ).Take(pagesize).ToListAsync();
     var totalCount = await context.Products.Where(w=>search==null || w.Description.Contains(search) || w.Title.Contains(search)).CountAsync();
     if( retval.Count==0 ) return Results.NotFound();
 
