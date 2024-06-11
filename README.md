@@ -163,6 +163,7 @@ Request Body:
   "clientName": "Marco Rossi",
   "address": "Via di qua 123",
   "totalPrice": 44,
+  "email" : "mario.rossi@gmail.com",
   "payment": {
     "number": "1234567890123456",
     "ownerName": "Marco Rossi",
